@@ -12,5 +12,5 @@ Project Includes:
 
 - **Book details:** An info screen that shows all the books in the database. Data is sorted from highest to lowest by “Number of times previously checked out”. Uses pagination. 
 
-- **Book reservation:** This screen should allow a user to reserve a book for the student. When a student and book name is selected, on click of the “Reserve” button, the book should be reserved for thatstudent. The book reservation should be successful only if these below criteria are satisfied. Uses ajax to send the data to the backend.
+- **Book reservation:** This screen should allow a user to reserve a book for the student. When a student and book name is selected, on click of the “Reserve” button, the book should be reserved for thatstudent. The book reservation should be successful under the criteria that no other student has reserved the book. Uses ajax to send the data to the backend.
 
