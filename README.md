@@ -1,5 +1,6 @@
 # This is my **BUS443: Web Development in Business Applications Final Project**
 **SQL, Python, HTML, CSS, PostGreSQL**
+
 Project Includes:
 - **Login screen:** The first screen/view should be a login/authentication screen.
 You should not be able to access any other screen within the app unless the user is
