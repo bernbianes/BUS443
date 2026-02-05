@@ -1,0 +1,89 @@
+{% extends "bookreservation/base.html" %}
+
+{% block content %}
+
+<!--Creates dropdown boxes to show student name and book name-->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md">
+            <select id="studentselect" class="form-select">
+                {% for row in student %}
+                <option value="{{ row.studentid }}">{{ row.studentid }} - {{ row.firstname }} {{row.lastname}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md">
+            <select id="bookselect" class="form-select">
+                {% for row in book %}
+                <option value="{{ row.bookid }}">{{ row.bookname }}</option>
+                {% endfor %}
+            </select>
+        </div>
+</div>
+
+<!-- Creates Reserve Button -->
+<div class="container text-center mt-5">
+    <button id="btnreserve" class="btn btn-primary">Reserve</button>
+</div>
+
+<!-- Displays the error message -->
+<div class="container text-center mt-3">
+    <h5 id="errormsg"></h5>
+</div>
+
+<!--Table that displays which student has reserved a book-->
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Book</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in reservation %}
+            <tr>
+                <td>{{ row.studentid }} - {{ row.studentname }}</td>
+                <td>{{ row.bookname }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+<!--Refresh the data without having to manually refresh-->
+<script>
+    $(document).ready(function(){
+
+        $("#btnreserve").click(function() {
+
+            $.ajax({
+
+                url: "{% url 'savereservation' %}",
+                data: {
+                    studentid: $("#studentselect").val(),
+                    bookid: $("#bookselect").val()
+                },
+
+                success: function(data){
+                    // Reloads the page automaticall
+                    if(data=="success"){
+                        window.location = "{% url 'reservation' %}"
+                    }
+                    else if(data=="toomany"){
+                        $("#errormsg").html("Student has reserved more than 4 books.")
+                    }
+                    else if(data=="taken"){
+                        $("#errormsg").html("Book is already reserved.")
+                    }
+                    else {
+                        $("#errormsg").html("Error making a book reservation.")
+                    }
+                }
+            })
+        })
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "bookreservation/base.html" %}
+
+{% block content %}
+<div>
+    <h2 class="mt-5 text-center">Student Dashboard</h2>
+</div>
+<!--Creating cards to display total students and average gpa-->
+<div class="container mt-5">
+    <div class="row text-center">
+        <!-- Total Students Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card bg-danger text-white p-4">
+                <div class="card-body">
+                    <h3 class="card-title">{{ total }}</h3>
+                    <p class="card-text">Total Students</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Average GPA Card -->
+        <div class="col-md-6 mb-4">
+            <div class="card bg-danger text-white p-4">
+                <div class="card-body">
+                    <h3 class="card-title">{{ average }}</h3>
+                    <p class="card-text">Average GPA</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid text-center mt-5">
+    <h4>Year Distribution</h4>
+    <div class="mt-5">
+        <canvas id="firstcanvas" height="100" width="300"></canvas>
+    </div>
+</div>
+
+<!--Import chartjs-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+
+<!--Create the Barchart-->
+<script>
+    let mychart = document.getElementById("firstcanvas")
+    let newchart = new Chart(mychart, {
+
+        type: 'bar',
+        data: {
+            labels: ["Freshman", "Sophomore", "Junior", "Senior"],
+            datasets: [{
+                label: "Year Count",
+                data: [{{ freshman }}, {{ sophomore }}, {{ junior }}, {{ senior}}],
+                            /* Hex Color and Opacity */
+                backgroundColor: 'rgb(195, 0, 16, 0.8)'
+            }]
+        },
+        options: {
+            scales:{
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    })
+</script>
+
+{% endblock %}
