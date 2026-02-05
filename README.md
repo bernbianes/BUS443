@@ -1,4 +1,4 @@
-#**BUS443: Web Development in Business Applications Final Project**
+# **BUS443: Web Development in Business Applications Final Project**
 **SQL, Python, HTML, CSS, PostGreSQL**
 
 Project Includes:
